@@ -1,0 +1,173 @@
+/* An order has an order number, a list of Items and total to be paid. The item has itemcode, item price and quantity. 
+One row in the item list will have details of one item described above and a subtotal. The subtotal can be calculated as the product of the item price and quantity of the item.  
+The total of the order can be calculated by adding subtotals of all the rows listed in the order. 
+*/
+solutions:
+
+//item class
+public class Item {
+	//attributes
+	private int itemCode;
+	private double itemPrice;
+	private int quantity;
+	private double subTotal;
+	
+	//constructor
+	public Item(int itemCode, double itemPrice, int quantity) {
+		this.itemCode = itemCode;
+		this.itemPrice = itemPrice;
+		this.quantity = quantity;
+	}
+	
+	//getter and setter methods of the class
+	public int getItemCode() {
+		return itemCode;
+	}
+	
+	public double getItemPrice() {
+		return itemPrice;
+	}
+	
+	public int getQuantity() {
+		return quantity;
+	}
+	
+	public double getSubTotal() {
+		return subTotal;
+	}
+	public void setSubTotal(double subTotal) {
+		this.subTotal = subTotal;
+	}
+	
+	//logic function of the class
+	public double calculateSubTotal() {
+		subTotal = this.itemPrice * this.quantity;
+		setSubTotal(subTotal);
+		return subTotal;
+	}
+	
+	public void displayDetails() {
+		System.out.println("\nItem code: " + this.itemCode);
+		System.out.println("Price per item: " + this.itemPrice);
+		System.out.println("Quantity purchased: " + this.quantity);
+		System.out.println("Subtotal of the item is: " + this.getSubTotal());
+	}
+}
+//order class
+import java.util.ArrayList;
+public class Order {
+  //attributes
+	private int orderNumber;
+	private double totalPrice;
+	private ArrayList<Item> itemList = new ArrayList<Item>();
+	
+	//constructor
+	public Order(int orderNumber) {
+		this.orderNumber = orderNumber;
+		this.totalPrice = 0.0;
+	}
+	
+	//getter methods of the class
+	public int getOrderNumber() {
+		return this.orderNumber;
+	}
+	
+	public double getTotalPrice() {
+		return this.totalPrice;
+	}
+	
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	
+	//logic functions of the class
+	
+	//adding an item to the list
+	public void addItem(Item i) {
+		this.itemList.add(i);
+	}
+	
+	public double calculateTotalrice() {
+		for(int i = 0; i < itemList.size(); i++) {
+			totalPrice = totalPrice + itemList.get(i).calculateSubTotal();
+		}
+		setTotalPrice(totalPrice);
+		return totalPrice;	
+	}
+	
+	//displaying bill
+		public void displayBill() {
+			System.out.println("\nOrder number is: " + this.getOrderNumber());
+			for(int j = 0; j < itemList.size(); j++) {
+				itemList.get(j).displayDetails();
+			}
+			
+			System.out.println("\n\nTotal price to pay is: " + this.totalPrice);
+		}
+	
+	
+}
+
+//test class
+public class TestOrder {
+
+	public static void main(String[] args) {
+		//for 1st order
+		Item item = new Item(100, 30, 5);
+		Item item1 = new Item(101, 70, 1);
+		Item item2 = new Item(102, 100, 3);
+		Order order = new Order(1);
+		order.addItem(item);
+		order.addItem(item1);
+		order.addItem(item2);
+		order.calculateTotalrice();
+		order.displayBill();
+		
+		//for 2nd order
+		Item item3 = new Item(50, 500, 2);
+		Item item4 = new Item(51, 1000, 1);
+		Order order1 = new Order(2);
+		order1.addItem(item3);
+		order1.addItem(item4);
+		order1.calculateTotalrice();
+		order1.displayBill();
+	}
+
+}
+
+//output of the code
+
+Order number is: 1
+
+Item code: 100
+Price per item: 30.0
+Quantity purchased: 5
+Subtotal of the item is: 150.0
+
+Item code: 101
+Price per item: 70.0
+Quantity purchased: 1
+Subtotal of the item is: 70.0
+
+Item code: 102
+Price per item: 100.0
+Quantity purchased: 3
+Subtotal of the item is: 300.0
+
+
+Total price to pay is: 520.0
+
+Order number is: 2
+
+Item code: 50
+Price per item: 500.0
+Quantity purchased: 2
+Subtotal of the item is: 1000.0
+
+Item code: 51
+Price per item: 1000.0
+Quantity purchased: 1
+Subtotal of the item is: 1000.0
+
+
+Total price to pay is: 2000.0
