@@ -1,0 +1,99 @@
+/*A person has a name. One can get the name or one can set the name.
+One can display the name. One can check if a person has the same name as the other person. 
+One can instantiate a person by giving the name. Write a class for this.
+An employee is a Person. It has name and salary. The details of the employee can be displayed.
+This should include the name of the employee and the salary. Users can instantiate an employee by giving the name. The salary of the employee can be set.
+Student is a Person. A student has a roll No and a year of study. The name, roll No and year of study can be displayed.
+*/
+solution:
+public abstract class Person{
+private String name;
+public Person() {
+super();
+name = "No name yet";
+}
+public Person(String myName) {
+super();
+name = myName;
+}
+public String getName() {
+return name;
+}
+public void setName(String anotherName) { name = anotherName;
+}
+public void DisplayName() {
+System.out.println(getName());
+}
+public abstract void DisplayDetails();
+public boolean CheckName(Person other) {
+
+return this.name.equalsIgnoreCase(other.name);
+}
+}
+public class Employee extends Person{
+private Double salary;
+public Employee() {
+super();
+}
+public Employee(String myName, Double salary) {
+super(myName);
+this.salary = salary;
+}
+
+public void setSalary(Double salary) {
+this.salary = salary;
+}
+public void DisplayDetails() {
+System.out.print("Employee name: "); DisplayName();
+System.out.println("Salary : Rs "+this.salary);
+
+}
+}
+public class Student extends Person{
+private int rollNo;
+private int yearOfStudy;
+public Student() {
+super();
+}
+public Student(String myName, int rollNo, int yearOfStudy) {
+super(myName);
+this.rollNo = rollNo;
+this.yearOfStudy = yearOfStudy;
+}
+public int getRollNo() {
+return rollNo;
+}
+public void setRollNo(int rollNo) {
+
+this.rollNo = rollNo;
+}
+public int getYearOfStudy() {
+return yearOfStudy;
+}
+public void setYearOfStudy(int yearOfStudy) {
+this.yearOfStudy = yearOfStudy;
+}
+public void DisplayDetails() {
+System.out.print("Student name: "); DisplayName();
+System.out.println("Roll number : "+this.rollNo);
+System.out.println("Year of Study : "+this.yearOfStudy);
+}
+}
+class TestPersonClass{
+public static void main(String args[]) { Person emp1 = new Employee("Suneel",
+
+40000.00);
+
+emp1.DisplayDetails();
+Person emp2 = new Employee("Rama", 20000.00); emp2.DisplayDetails();
+
+
+System.out.println("	");
+Person std1 = new Student("Rose", 5601,2022); std1.DisplayDetails();
+Person std2 = new Student("Ram", 5602,2021);
+ std2.DisplayDetails();
+
+System.out.println("	");
+System.out.println("Check if the employee and student have the same name:- "+emp2.CheckName(std2));
+}
+}
