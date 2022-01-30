@@ -1,0 +1,145 @@
+/* A bill has line items (min 1 and maximum any). Every line item has item name, item price per unit, quantity bought and subtotal.
+The subtotal can be computed from price per unit and quantity.
+The bill also has grand total. The grand total can be calculated by adding all the subtotals.
+*/
+solution:
+//LineItem class
+public class LineItem {
+	//attributes
+	private String itemName;
+	private double pricePerUint;
+	private int quantity;
+	private double subTotal;
+	
+	//constructor
+	public LineItem(String itemName, double pricePerUnit, int quantity) {
+		this.itemName = itemName;
+		this.pricePerUint = pricePerUnit;
+		this.quantity = quantity;
+	}
+
+	//getter and setter methods of the class
+	public String getItemName() {
+		return itemName;
+	}
+
+	public double getPricePerUint() {
+		return pricePerUint;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public double getSubTotal() {
+		return subTotal;
+	}
+
+	public void setSubTotal(double subTotal) {
+		this.subTotal = subTotal;
+	}
+	
+	//logic function of the class
+	public double calculateSubTotal() {
+		subTotal = this.pricePerUint * this.quantity;
+		setSubTotal(subTotal);
+		return subTotal;
+	}
+	
+	public void displayItemDetails() {
+		System.out.println("\nItem name: " + this.getItemName());
+		System.out.println("Price per unit: " + this.getPricePerUint());
+		System.out.println("Quantity purchased: " + this.getQuantity());
+		System.out.println("SubTotal is: " + this.getSubTotal());
+	}
+	
+}
+
+
+//bill class
+import java.util.ArrayList;
+
+public class Bill {
+	
+	//attributes
+	private ArrayList<LineItem> item = new ArrayList<LineItem>();
+	private double grandTotal;
+	
+	//constructor
+	public Bill() {
+		this.grandTotal = 0.0;
+	}
+
+	//getter and setter methods of the class
+	public double getGrandTotal() {
+		return grandTotal;
+	}
+	
+	public void setGrandTotal(double grandTotal) {
+		this.grandTotal = grandTotal;
+	}
+	
+	//logic functions of the class
+	//adding items to the list
+	public void addItem(LineItem a) {
+		this.item.add(a);
+	}
+	
+	
+	public double calculateGrandTotal() {
+		for(int i = 0; i < item.size(); i++) {
+			grandTotal = grandTotal + item.get(i).calculateSubTotal();
+		}
+		setGrandTotal(grandTotal);
+		return grandTotal;	
+	}
+	
+	public void displayBill() {
+		for(int j = 0; j < item.size(); j++) {
+			item.get(j).displayItemDetails();
+		}
+		System.out.println("\n\nTotal amount to be paid is: " + this.getGrandTotal());
+	}
+}
+//test class
+public class TestBill {
+
+	public static void main(String[] args) {
+		
+		LineItem item = new LineItem("Biscuits", 30, 5);
+		LineItem item1 = new LineItem("Tomato ketchup", 80, 2);
+		LineItem item2 = new LineItem("Milk toast", 40, 3);
+		LineItem item3 = new LineItem("Shampoo", 100, 1);
+		Bill bill = new Bill();
+		bill.addItem(item);
+		bill.addItem(item1);
+		bill.addItem(item2);
+		bill.addItem(item3);
+		bill.calculateGrandTotal();
+		bill.displayBill();
+	}
+
+}
+//OUTPUT:
+Item name: Biscuits
+Price per unit: 30.0
+Quantity purchased: 5
+SubTotal is: 150.0
+
+Item name: Tomato ketchup
+Price per unit: 80.0
+Quantity purchased: 2
+SubTotal is: 160.0
+
+Item name: Milk toast
+Price per unit: 40.0
+Quantity purchased: 3
+SubTotal is: 120.0
+
+Item name: Shampoo
+Price per unit: 100.0
+Quantity purchased: 1
+SubTotal is: 100.0
+
+
+Total amount to be paid is: 530.0
