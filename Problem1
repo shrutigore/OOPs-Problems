@@ -1,0 +1,23 @@
+Draw UML diagrams for following statements:
+(1) A student has a rollNo, a name and a date of birth. The date of birth has a day, a month and a year. One can get the name of the student, roll no and date of birth. 
+Guess: two classes, Student and Date
+Attributes: 
+Student:rollNo(int), Name(String), DateofBirth(Date)
+Date: day(int), month(int), year(int)
+
+
+(2) An order has order lines. 
+An order line has an item description, item price, item quantity and line total. 
+An item has item description, item price.
+The line total is the product of item price and item quantity. 
+An order has a grand total. The grand total is the sum of all the line totals.
+
+
+(3) A mobile bill has a mobile number, it has a  customer name and call records. Each call record has a date, number and a duration.
+
+(4) A mark list has a student’s name, a student’s examination number, marks in five courses and average of marks. One can calculate the average by taking the average of marks of all the courses.
+
+(5) An employee has a name, aadhar card and an address. The address has flat no, apartment name, road, city and pin code. 
+
+(6) A car has wheels. It has doors. It has steering. It has starter. It has accelerator. It has break. When a car is started, the starter is started. When car is increased with the speed
+
