@@ -1,0 +1,62 @@
+/* A yard is a unit where trains undergo the cleaning and other technical maintenance.
+A yard is empty at the end of a day. One train (UP4053) arrives in the yard. 
+Then one more train (DN3021) arrives in the yard. Like this, five trains arrive in the yard. (DN4067, UP1025, UP2024)
+Now, one train goes out from the yard (UP1025). Then one more train goes out from the yard (UP2024). 
+Check if a train with number DN3768 is present in the yard. Display its status. Display all the trains present in the yard. 
+In short, the arrival of trains in the yard and the departure of trains from the yard happens all across the day. 
+*/
+solution:
+import java.util.ArrayList ;
+public class Yard {
+  private ArrayList<Train> listOfTrains = new ArrayList<Train>();
+  
+  public void addTrain(Train t) {
+	  this.listOfTrains.add(t);
+  }
+  public void removeTrain(Train t) {
+	  this.listOfTrains.remove(t);
+  }
+  public void displayTrainDetails() {
+	  for(int i = 0 ;i<listOfTrains.size() ; i++) {
+		  Train t = listOfTrains.get(i);
+		  listOfTrains.get(i).displaydetails();
+		  System.out.println(isTrainPresent(t));
+	  }
+  }
+  public boolean isTrainPresent(Train t) {
+	  return listOfTrains.contains(t);
+  }
+}
+
+public class Train {
+ private String trainnumber ;
+ public Train (String tNo) {
+	  this.trainnumber = tNo  ;
+ }
+ public void displaydetails () {
+	 System.out.println("\n The present train number in yard is = " + this.trainnumber);
+ }
+ 
+public class Yarddisplay {
+	public static void main (String[] args) {
+		Yard obj = new Yard();
+		Train t1 = new Train ("UP4053");
+		Train t2 = new Train ("DN3021");
+		Train t3 = new Train ("DN4067");
+		Train t4 = new Train ("UP1025");
+		Train t5 = new Train ("UP2024");
+		Train t6 = new Train("DN3768");
+		obj.addTrain(t1);
+		obj.addTrain(t2);
+		obj.addTrain(t3);
+		obj.addTrain(t4);
+		obj.addTrain(t5);
+		obj.removeTrain(t4);
+		obj.removeTrain(t5);
+		System.out.println("The train having train no 'DN3768' is present ? " + obj.isTrainPresent(t6));
+		
+		obj.displayTrainDetails();
+		
+	}
+
+}
