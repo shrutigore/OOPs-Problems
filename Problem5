@@ -1,0 +1,95 @@
+/* A shop has products. Each product has product name, product price, tax in percentage and total
+price. The tax paid for each product can be computed as product price multiplied by tax as a
+fractional number. The total price of each product can be calculated as product price plus tax paid.
+*/
+solution:
+
+public class Product {
+	private String productName;
+	private double Tax;
+	private double productPrice;
+	private double productTax;
+	private double totalPrice;
+	
+	
+	public Product(String productName , double Tax , double productPrice ) {
+		this.productName=productName;
+		this.productPrice=productPrice;
+		this.Tax=Tax;
+	}
+	
+	public String getProductName() {
+		return this.productName;
+	}
+	
+	public double getTax() {
+		return this.Tax;
+	}
+
+	
+	public double getProductPrice() {
+		return this.productPrice;
+	}
+	
+	public double calculateTax () {
+		productTax = this.Tax* this.productPrice;
+		return productTax;
+		
+	}
+	
+	public double calculateTotalPrice() {
+		totalPrice = this.productTax + this.productPrice;
+		return totalPrice;
+		
+	}
+	
+public class Shop {
+	
+	private double investment ;
+	ArrayList<Product> productlist = new ArrayList<>();
+	public void addProductInShop(Product p) {
+   productlist.add(p);
+		}
+	public double calculateInvestment() {
+		double t ;
+		for(int i = 0 ;i<productlist.size();i++) {
+			t = productlist.get(i).totalProductPrice();
+			investment = investment + t;
+					
+		}
+		return this.investment;
+	}
+	public double getInvestmentOfShop() {
+		return this.investment;
+	}
+	public void displayDetailsOfShop () {
+		System.out.println("\n------------------Products available in Shop------------------");
+		System.out.println("\nProduct Name\t Product Price \t Tax \t   ProductTax \t Total Price\tProduct Quantity");
+		for(int …
+
+public class TesterProgram {
+	public static void main(String[] args) {
+		
+		Product obj = new Product("Books" , 0.2 , 100 ,10);
+		obj.calculateTax();
+		obj.calculateTotalPrice();
+		
+		Product obj1 = new Product("Pens", 0.4, 200 , 50);
+		obj1.calculateTax();
+		obj1.calculateTotalPrice();
+		
+		Product obj2 = new Product("Bags", 0.3, 3000 , 25);
+		obj2.calculateTax();
+		obj2.calculateTotalPrice();
+		obj2.totalProductPrice();
+		
+		Shop obj3 = new Shop();
+		obj3.addProductInShop(obj);
+		obj3.addProductInShop(obj1);
+		obj3.addProductInShop(obj2);
+		obj3.calculateInvestment();
+		obj3.displayDetailsOfShop();
+	}
+
+}
+
