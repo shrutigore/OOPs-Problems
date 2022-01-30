@@ -1,0 +1,288 @@
+/*An employee has an employee ID and name. Name has first name, middle name and surname. 
+Employee ID and surname can be displayed. Employee ID, first name and surname of employee can be displayed.
+Employee ID, first name, initials of middle name with capital case and dot after that and surname can be displayed.
+Employee has total salary. The total salary of the employee can be calculated. 
+The daily wage employee is an employee it has working hours in a month and wage per hour.
+The total salary of the daily wage employee is product of wage and working hours. The supervisor is an employee. 
+It has basic salary, dearness allowance and transport allowance. The total salary of the supervisor is the summation of these three. 
+The manager is an employee. It has basic salary, supervision allowance, house rent allowance and dearness allowance. 
+Its total salary can be calculated as summation of these four.
+Dearness allowance is 50% of basic salary
+Transport allowance is 30 %of basic salary
+Supervision allowance is 20% of basic salary
+House rent allowance is 40% of basic salary
+*/
+solution:
+public class Name {
+    // attributes
+    private String firstname;
+    private String middlename;
+    private String surname;
+
+    // constructor
+    public Name(String firstname, String middlename, String surname) {
+   	 this.firstname = firstname;
+   	 this.middlename = middlename;
+   	 this.surname = surname;
+    }
+
+    // getter methods
+    public String getFirstname() {
+   	 return this.firstname;
+    }
+
+    public String getMiddlename() {
+   	 return this.middlename;
+    }
+
+    public String getSurname() {
+   	 return this.surname;
+    }
+
+    // logic
+    public String displaySurname() {
+   	 return this.getSurname();
+    }
+
+    public String displayFirstname() {
+   	 return this.getFirstname();
+    }
+
+    public char displayMiddlenameInitials() {
+   	 return this.getMiddlename().toUpperCase().charAt(0);
+    }
+}
+
+public abstract class Employee {
+    // attributes
+    private int employeeID;
+    private Name name;
+    private String aadharCardNo;
+    private double totalSalary;
+
+    // constructor
+    public Employee(int employeeID, Name name,
+   		 String aadharCardNo) {
+
+   	 this.employeeID = employeeID;
+   	 this.name = name;
+   	 this.aadharCardNo = aadharCardNo;
+
+    }
+
+    // getter setter methods
+    public int getEmployeeID() {
+   	 return this.employeeID;
+    }
+
+    public String getAadharCardNo() {
+   	 return this.aadharCardNo;
+    }
+
+    public double getTotalSalary() {
+   	 return totalSalary;
+    }
+
+    public void setTotalSalary(double totalSalary) {
+   	 this.totalSalary = totalSalary;
+    }
+
+    // logic
+    public void displayIDSurname() {
+
+   	 System.out.println("EmployeeID: " + this.getEmployeeID());
+   	 System.out.println("Surname: " + this.name.displaySurname());
+    }
+
+    public void displayIDFirstnameSurname() {
+   	 System.out.println("Employee ID: " + this.getEmployeeID());
+   	 System.out.print("Name: " + this.name.displayFirstname() + " "
+   			 + this.name.displaySurname());
+   	 System.out.println();
+    }
+
+    public void displayIDSurnameMiddlenameInitialsSurname() {
+   	 System.out.println("Employee ID: " + this.getEmployeeID());
+   	 System.out.print("Name: " + this.name.displayFirstname() + " "
+   			 + this.name.displayMiddlenameInitials() + "."
+   			 + this.name.displaySurname());
+   	 System.out.println();
+    }
+
+    
+    public void displayTotalSalary(){
+   	 calculateTotalSalary();
+   	 System.out.println(this.getTotalSalary());
+    }
+
+    public abstract void calculateTotalSalary();
+
+}
+
+public class DailyWageEmployee extends Employee {
+    // attributes
+    private double workingHrs;
+    private double wagePerHr;
+
+    // constructor
+    public DailyWageEmployee(int employeeID, Name name, 
+   		 String aadharCardNo, double workingHrs, double wagePerHr) {
+   	 super(employeeID, name, aadharCardNo);
+   	 this.workingHrs = workingHrs;
+   	 this.wagePerHr = wagePerHr;
+    }
+
+    // getter setter methods
+    public double getWorkingHrs() {
+   	 return this.workingHrs;
+    }
+
+    public double getWagePerHr() {
+   	 return this.wagePerHr;
+    }
+
+    // logic
+    public void calculateTotalSalary() {
+     super.setTotalSalary(this.getWagePerHr()*this.getWorkingHrs());
+   	 
+    
+    }
+}
+
+public class Supervisor extends Employee {
+
+    //attributes
+    private double basicSalary;
+    private double dearnessAllowance;
+    private double transportAllowance;
+    //constructor
+    public Supervisor(int employeeID,Name name, String aadharCardNo,double basicSalary){
+   	 super(employeeID,name,aadharCardNo);
+   	 this.basicSalary=basicSalary;
+   	 
+    }
+    //getter setter methods
+    public double getBasicSalary(){
+   	 return this.basicSalary;
+    }
+    public double getDearnessAllowance(){
+   	 return this.dearnessAllowance;
+    }
+    public double getTransportAllowance(){
+   	 return this.transportAllowance;
+    }
+    //logic
+    public double calculateDearnessAllowance(){
+   	 this.dearnessAllowance=this.getBasicSalary()*0.5;
+   	 return this.getDearnessAllowance();
+    }
+    public double calculateTransportAllowance(){
+   	 this.transportAllowance=this.getBasicSalary()*0.3;
+   	 return this.getTransportAllowance();
+    }
+    public void calculateTotalSalary(){
+   	 
+   	 super.setTotalSalary(this.getBasicSalary()+this.calculateDearnessAllowance()+this.calculateTransportAllowance());
+   	 
+    }
+}
+public class Manager extends Employee{
+    private double basicSalary;
+private double supervisionAllowance;
+private double houseRentAllowance;
+private double dearnessAllowance;
+
+public Manager(int employeeID, Name name,
+   	 String aadharCardNo,double basicSalary){
+    super( employeeID,  name,
+   		 aadharCardNo);
+    this.basicSalary=basicSalary;
+}
+public double getBasicSalary(){
+    return this.basicSalary;
+}
+public double getSupervisionAllowance(){
+    return this.supervisionAllowance;
+}
+public double getHouseRentAllowance(){
+    return this.houseRentAllowance;
+}
+public double getDearnessAllowance(){
+    return this.dearnessAllowance;
+}
+public double calculateSupervisionAllowance(){
+    this.supervisionAllowance=this.basicSalary*0.2;
+    return this.getSupervisionAllowance();
+}
+public double calculateDearnessAllowance(){
+    this.dearnessAllowance=this.getBasicSalary()*0.5;
+    return this.getDearnessAllowance();
+}
+public double calculateHouseRentAllowance(){
+    this.houseRentAllowance=this.getBasicSalary()*0.4;
+    return this.getHouseRentAllowance();
+}
+public void calculateTotalSalary(){
+    
+    super.setTotalSalary(this.getBasicSalary()+this.calculateDearnessAllowance()+this.calculateHouseRentAllowance()+this.calculateSupervisionAllowance());
+    
+}
+}
+public class TestEmployeeNameWages {
+
+	public static void main(String[] args) {
+
+		Name n1 = new Name("Shital", "Ajay", "bhosale");
+		DailyWageEmployee dwe1 = new DailyWageEmployee(123, n1, "333333333333", 50.0, 100);
+		dwe1.displayIDFirstnameSurname();
+		dwe1.displayIDSurname();
+		dwe1.displayIDSurnameMiddlenameInitialsSurname();
+		dwe1.displayTotalSalary();
+		System.out.println();
+		Name n2 = new Name("Shruti", "Macindra", "Gore");
+		Supervisor s1 = new Supervisor(987, n2, "555555555555", 500000);
+
+		
+		s1.displayIDFirstnameSurname();
+		s1.displayIDSurname();
+		s1.displayIDSurnameMiddlenameInitialsSurname();
+s1.displayTotalSalary();
+		System.out.println();
+		Name n3 = new Name("sushma", "ramesh", "kulkarni");
+		Manager m1 = new Manager(667, n3, "123456778", 600000);
+		
+		m1.displayIDFirstnameSurname();
+		m1.displayIDSurname();
+		m1.displayIDSurnameMiddlenameInitialsSurname();
+m1.displayTotalSalary();
+
+	}
+
+}
+
+
+
+Output:
+Employee ID: 123
+Name: Shital Bhosale
+EmployeeID: 123
+Surname: Bhosale
+Employee ID: 123
+Name: Shital A.Bhosale
+5000.0
+
+Employee ID: 987
+Name: Shruti Gore
+EmployeeID: 987
+Surname: Vaidya
+Employee ID: 987
+Name: Shruti M.Gore
+900000.0
+
+Employee ID: 667
+Name: sushma kulkarni
+EmployeeID: 667
+Surname: kulkarni
+Employee ID: 667
+Name: sushma R.kulkarni
+1260000.0
