@@ -1,0 +1,59 @@
+/* A quiz has maximum marks, total students who gave the quiz and a list of the marks obtained.
+Marks obtained can be added into a list having all the marks as zero initially. 
+Create an object of the quiz and show the total students, maximum marks and marks obtained. 
+*/
+solution:
+ // class 1
+import java.util.Scanner;
+public class Quiz {
+    private int maximumMarks;
+    private int marksObtained[];
+    private int totalStudents;
+
+    // constructor
+    public Quiz(int maximumMarks, int totalStudents) {
+        this.totalStudents = totalStudents;
+        this.maximumMarks = maximumMarks;
+        this.marksObtained = new int[totalStudents];
+    }
+
+    Scanner inp = new Scanner(System.in);
+
+    public void AcceptMarks() {
+
+        System.out.println("\nEnter the Marks of : ");
+        for (int i = 0; i < totalStudents; i++) {
+            System.out.print("Student" + (i + 1) + " : ");
+            marksObtained[i] = inp.nextInt();
+        }
+
+    }
+
+    public void DisplayAllOfQuiz() {
+        System.out.println("\nTotal number of Students = " + this.totalStudents);
+        System.out.println("Maximum Marks = " + this.maximumMarks);
+    }
+
+    public void DisplayMarks() {
+        System.out.println("\nDisplaying Marks of Students : ");
+
+        for (int i = 0; i < totalStudents; i++) {
+            System.out.print("\nStudent" + (i + 1) + " : ");
+            System.out.print(this.marksObtained[i]);
+
+        }
+
+    }
+}
+// class second
+public class Test {
+    public static void main(String[] args) {
+
+        Quiz obj1 = new Quiz(20 ,7);
+        obj1.DisplayAllOfQuiz();
+        obj1.AcceptMarks();
+        obj1.DisplayMarks();
+    }
+
+}
+
