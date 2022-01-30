@@ -1,0 +1,110 @@
+/* Aim: Identify the classes, their attributes and methods for a given system
+Description:
+A student has a roll No, marks of five courses and average. Define the class Student. It should
+calculate the average of the marks. Instantiate three objects of the student and show the
+average of all.
+Identify the nouns:  (attributes)
+Identify the verbs: (methods/functions)
+*/ 
+solution:
+
+public class Student {
+   //attributes
+	private int rollNo;
+	private int marks1;
+	private int marks2;
+	private int marks3;
+	private int marks4;
+	private int marks5;
+	private double average;
+	
+	//constructor
+	public Student(int rollNo, int marks1, int marks2, int marks3, int marks4, int marks5) {
+		this.rollNo = rollNo;
+		this.marks1 = marks1;
+		this.marks2 = marks2;
+		this.marks3 = marks3;
+		this.marks4 = marks4;
+		this.marks5 = marks5;
+	}
+
+	//getter and setter methods of the class
+	
+	public int getRollNo() {
+		return rollNo;
+	}
+
+	public int getMarks1() {
+		return marks1;
+	}
+
+	public int getMarks2() {
+		return marks2;
+	}
+
+	public int getMarks3() {
+		return marks3;
+	}
+
+	public int getMarks4() {
+		return marks4;
+	}
+
+	public int getMarks5() {
+		return marks5;
+	}
+	
+	
+	public double getAverage() {
+		return average;
+	}
+	
+	public void setAverage(double average) {
+		this.average = average;
+	}
+
+	//logic function of the class
+	public double calculateAverageMarks() {
+		average = ( this.getMarks1() + this.getMarks2() + this.getMarks3() + this.getMarks4() + this.getMarks5() ) / 5.00;
+		setAverage(average);
+		return average;		
+	}
+	
+	public void displayAllInformation() {
+		System.out.println("\nRoll no of student is: " + this.getRollNo());
+		System.out.println("Average marks are: " + this.getAverage());
+	}
+	
+}
+ public class TestStudent {
+
+	public static void main(String[] args) {
+
+		Student st1 = new Student(2601, 52, 88, 90, 87, 45);
+		st1.calculateAverageMarks();
+		st1.displayAllInformation();
+		
+		Student st2 = new Student(2602, 89, 99, 100, 85, 90);
+		st2.calculateAverageMarks();
+		st2.displayAllInformation();
+		
+		Student st3 = new Student(2603, 55, 45, 26, 76, 60);
+		st3.calculateAverageMarks();
+		st3.displayAllInformation();
+
+	}
+
+}
+
+Output :
+
+Roll no of student is: 1
+Average marks are: 62.4
+
+Roll no of student is: 2
+Average marks are: 70.8
+
+Roll no of student is: 3
+Average marks are: 60.6
+
+Process finished with exit code 0
